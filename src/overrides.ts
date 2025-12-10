@@ -45,7 +45,15 @@ import { Variant } from "#sprites/variant";
  * }
  * ```
  */
-const overrides = {} satisfies Partial<InstanceType<OverridesType>>;
+const overrides = {
+  MOVESET_OVERRIDE: MoveId.BOUNCE,
+  STARTING_LEVEL_OVERRIDE: 100, // 플레이어 레벨도 높게
+  STARTER_SPECIES_OVERRIDE: SpeciesId.BLISSEY, // 플레이어도 블리시로 (높은 HP)
+  ENEMY_SPECIES_OVERRIDE: SpeciesId.MAGIKARP, // 적은 약한 마기카프로
+  ENEMY_LEVEL_OVERRIDE: 100, // 적의 레벨을 낮게
+  ENEMY_MOVESET_OVERRIDE: MoveId.SPLASH, // 적이 아무것도 안하는 기술만 사용
+  CRITICAL_HIT_OVERRIDE: false, // 크리티컬 히트 비활성화
+} satisfies Partial<InstanceType<OverridesType>>;
 
 /**
  * If you need to add Overrides values for local testing do that inside {@linkcode overrides}

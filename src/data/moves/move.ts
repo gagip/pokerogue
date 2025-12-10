@@ -1131,7 +1131,7 @@ export abstract class Move implements Localizable {
     if (this.isChargingMove()) {
       return false;
     }
-    
+
     // ...cannot enhance moves hitting multiple targets unless specified
     const { targets, multiple } = getMoveTargets(user, this.id);
     if (restrictSpread && multiple && targets.length > 1) {
@@ -1140,7 +1140,7 @@ export abstract class Move implements Localizable {
 
     // ...cannot enhance status moves, including ally-targeting Pollen Puff
     if (
-        this.category === MoveCategory.STATUS 
+        this.category === MoveCategory.STATUS
         || (target != null && user.getMoveCategory(target, this) === MoveCategory.STATUS)) {
       return false;
     }
@@ -9650,7 +9650,7 @@ export function initMoves() {
       .attr(RechargeAttr),
     new SelfStatusMove(MoveId.BULK_UP, PokemonType.FIGHTING, -1, 20, -1, 0, 3)
       .attr(StatStageChangeAttr, [ Stat.ATK, Stat.DEF ], 1, true),
-    new ChargingAttackMove(MoveId.BOUNCE, PokemonType.FLYING, MoveCategory.PHYSICAL, 85, 85, 5, 30, 0, 3)
+    new ChargingAttackMove(MoveId.BOUNCE, PokemonType.FLYING, MoveCategory.PHYSICAL, 85, 85, 2, 30, 0, 3)
       .chargeText(i18next.t("moveTriggers:sprangUp", { pokemonName: "{USER}" }))
       .chargeAttr(SemiInvulnerableAttr, BattlerTagType.FLYING)
       .attr(StatusEffectAttr, StatusEffect.PARALYSIS)
