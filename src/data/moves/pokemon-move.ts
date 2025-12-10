@@ -1,4 +1,5 @@
 import { allMoves } from "#data/data-lists";
+import { BattlerTagType } from "#enums/battler-tag-type";
 import { ChallengeType } from "#enums/challenge-type";
 import { MoveId } from "#enums/move-id";
 import type { Pokemon } from "#field/pokemon";
@@ -58,7 +59,11 @@ export class PokemonMove {
       return [false, i18next.t("battle:moveNotImplemented", moveName.replace(" (N)", ""))];
     }
 
-    if (!ignorePp && move.pp !== -1 && this.ppUsed >= this.getMovePp()) {
+    // Skip PP check if this is the release turn of a charging move
+    // (PP was already consumed during the charging turn)
+    const isReleasingChargingMove = move.isChargingMove() && pokemon.getTag(BattlerTagType.CHARGING);
+
+    if (!ignorePp && !isReleasingChargingMove && move.pp !== -1 && this.ppUsed >= this.getMovePp()) {
       return [false, i18next.t("battle:moveNoPp", { moveName: move.name })];
     }
 
